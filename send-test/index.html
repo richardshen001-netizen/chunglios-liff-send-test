@@ -44,6 +44,11 @@
       }
       try {
         await liff.init({ liffId: LIFF_ID });
+        if (new URLSearchParams(location.search).get('mode') === 'mm') {
+          const {openControl} = await import('./mm-control.js');
+          openControl(liff);
+          return;
+        }
         status.textContent = '';
         button.disabled = false;
       } catch (error) {
