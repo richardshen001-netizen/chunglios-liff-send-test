@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIFF sendMessages test</title>
+  <style>
+    body { font: 18px system-ui, sans-serif; margin: 32px auto; padding: 20px; max-width: 480px; }
+    button { width: 100%; padding: 20px; font: inherit; font-weight: 700; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <button id="send" disabled>Send LIFFTEST</button>
+  <pre id="status" role="status">Loading…</pre>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    // Set only after Richard supplies the newly created LIFF App ID.
+    const LIFF_ID = '';
+    const button = document.getElementById('send');
+    const status = document.getElementById('status');
+
+    function showError(error) {
+      status.textContent = [error?.code, error?.message || String(error)]
+        .filter(Boolean).join(': ');
+    }
+
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      status.textContent = '';
+      try {
+        await liff.sendMessages([{ type: 'text', text: 'LIFFTEST' }]);
+        status.textContent = 'Sent';
+      } catch (error) {
+        showError(error);
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    async function start() {
+      if (!LIFF_ID) {
+        status.textContent = 'Waiting for the new LIFF App ID.';
+        return;
+      }
+      try {
+        await liff.init({ liffId: LIFF_ID });
+        status.textContent = '';
+        button.disabled = false;
+      } catch (error) {
+        showError(error);
+      }
+    }
+    start();
+  </script>
+</body>
+</html>
