@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RSVP UX Test</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RSVP UX Test</title>
 <style>body{margin:0;background:#e9ede8;color:#18211c;font:18px system-ui,sans-serif;min-height:100dvh;display:grid;place-items:center}main{box-sizing:border-box;background:white;border-radius:20px;padding:28px 22px;width:calc(100% - 36px);max-width:410px;text-align:center;box-shadow:0 10px 35px #24392a18}h1{font-size:25px;margin:8px 0 24px}p{line-height:1.6}strong{color:#45694c}footer{display:flex;gap:12px;margin-top:28px}button{flex:1;padding:15px;border-radius:12px;border:1px solid #506054;background:white;font:inherit}#confirm{background:#45694c;color:white}button:disabled{opacity:.45}#status{min-height:28px;color:#45694c;overflow-wrap:anywhere}</style></head>
-<body><main><h1>確認您的回覆？</h1><p>9/25（五）19:15–21:00</p><p>您選擇：<br><strong id="answer"></strong></p><footer><button id="cancel">取消</button><button id="confirm" disabled>確認</button></footer><p id="status" role="status"></p></main>
+<body><main><h1>Confirm your response?</h1><p>Sep 25 (Fri) · 19:15–21:00</p><p>You selected:<br><strong id="answer"></strong></p><footer><button id="cancel">Cancel</button><button id="confirm" disabled>Confirm</button></footer><p id="status" role="status"></p></main>
 <script>
 const LIFF_ID='2011276672-KMcqYClm';
-const labels={attending:'我會出席',not_attending:'我無法出席',unsure:'還不確定'};
+const labels={attending:'Attend',not_attending:'Not Attend',unsure:'Unsure'};
 const status=document.getElementById('status'),confirmButton=document.getElementById('confirm');
 let ready;
 async function closeConfirmation(){
@@ -20,13 +20,13 @@ function showAnswer(){
  const meeting=p.get('meeting')||nested?.get('meeting');
  const answer=p.get('answer')||nested?.get('answer');
  if(meeting!=='test-20260925'||!Object.hasOwn(labels,answer)){status.textContent='Test / Not implemented';return;}
- document.getElementById('answer').textContent='「'+labels[answer]+'」';status.textContent='';confirmButton.disabled=false;
+ document.getElementById('answer').textContent='“'+labels[answer]+'”';status.textContent='';confirmButton.disabled=false;
 }
 showAnswer();
 ready=new Promise((resolve,reject)=>{
  const sdk=document.createElement('script');sdk.src='https://static.line-scdn.net/liff/edge/2/sdk.js';
  sdk.onload=()=>liff.init({liffId:LIFF_ID}).then(resolve,reject);
- sdk.onerror=()=>reject(new Error('LINE 元件載入失敗，請關閉後重開。'));
+ sdk.onerror=()=>reject(new Error('Unable to load LINE. Please close and reopen.'));
  document.head.appendChild(sdk);
 });
 ready.catch(e=>{status.textContent=e.message||String(e);});
