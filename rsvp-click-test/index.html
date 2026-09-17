@@ -20,7 +20,8 @@ function showAnswer(){
  const nested=state?new URL(state,location.origin).searchParams:null;
  const meeting=p.get('meeting')||nested?.get('meeting');
  const answer=p.get('answer')||nested?.get('answer');
- if(meeting!=='test-20260925'||!Object.hasOwn(labels,answer)){status.textContent='Test / Not implemented';return;}
+ if(!['test-20260925','test-20261009'].includes(meeting)||!Object.hasOwn(labels,answer)){status.textContent='Test / Not implemented';return;}
+ document.querySelector('.date').textContent=meeting==='test-20261009'?'Oct 9 (Fri) · 19:15–21:30':'Sep 25 (Fri) · 19:15–21:30';
  document.getElementById('answer').textContent=labels[answer];document.getElementById('answer').dataset.answer=answer;status.textContent='';confirmButton.disabled=false;
 }
 showAnswer();
