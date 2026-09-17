@@ -6,8 +6,9 @@
 const LIFF_ID='2011276672-KMcqYClm';
 const labels={attending:'我會出席',not_attending:'我無法出席',unsure:'還不確定'};
 const status=document.getElementById('status'),confirmButton=document.getElementById('confirm');
-document.getElementById('cancel').onclick=()=>{if(window.liff?.isInClient())liff.closeWindow();else history.back();};
-confirmButton.onclick=()=>{confirmButton.disabled=true;status.textContent='✓ 已確認';setTimeout(()=>{status.textContent='';confirmButton.disabled=false;},2500);};
+function closeConfirmation(){if(window.liff?.isInClient())liff.closeWindow();else history.back();}
+document.getElementById('cancel').onclick=closeConfirmation;
+confirmButton.onclick=closeConfirmation;
 async function start(){
  if(!LIFF_ID){status.textContent='等待新的測試 LIFF ID';return;}
  try{
