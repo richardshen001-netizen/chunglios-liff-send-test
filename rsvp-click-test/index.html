@@ -3,7 +3,7 @@
 <style>body{margin:0;background:#e9ede8;color:#18211c;font:18px system-ui,sans-serif;min-height:100dvh;display:grid;place-items:center}main{box-sizing:border-box;background:white;border-radius:20px;padding:28px 22px;width:calc(100% - 36px);max-width:410px;text-align:center;box-shadow:0 10px 35px #24392a18}h1{font-size:25px;margin:8px 0 24px}p{line-height:1.6}strong{color:#45694c}footer{display:flex;gap:12px;margin-top:28px}button{flex:1;padding:15px;border-radius:12px;border:1px solid #506054;background:white;font:inherit}#confirm{background:#45694c;color:white}button:disabled{opacity:.45}#status{min-height:28px;color:#45694c;overflow-wrap:anywhere}</style></head>
 <body><main><h1>確認您的回覆？</h1><p>9/25（五）19:15–21:00</p><p>您選擇：<br><strong id="answer"></strong></p><footer><button id="cancel">取消</button><button id="confirm" disabled>確認</button></footer><p id="status" role="status">載入中…</p></main>
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script><script>
-const LIFF_ID='';
+const LIFF_ID='2011276672-KMcqYClm';
 const labels={attending:'我會出席',not_attending:'我無法出席',unsure:'還不確定'};
 const status=document.getElementById('status'),confirmButton=document.getElementById('confirm');
 document.getElementById('cancel').onclick=()=>{if(window.liff?.isInClient())liff.closeWindow();else history.back();};
